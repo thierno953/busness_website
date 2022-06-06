@@ -1,80 +1,103 @@
+.flex {
+  display: flex;
+  justify-content: space-between;
+}
+
+ul {
+  list-style: none;
+}
+
+a {
+  text-decoration: none;
+  color: #373a37;
+}
+
 header {
-  background-color: #fff;
-  height: 10vh;
-  box-shadow: 0 5px 30px rgb(0 22 84 / 10%);
-  padding: 15px 0;
-  position: sticky;
-  top: 0;
-  z-index: 99999;
+  padding: 20px 0;
 }
 
-header img {
-  width: 170px;
+header ul {
+  display: inline-block;
 }
 
-header a {
+header ul li {
+  display: inline-block;
   margin-left: 30px;
-  transition: 0.5s;
-  font-weight: 500;
 }
 
-header a:hover {
-  color: #27ae60;
-}
-
-header span {
-  width: auto;
-  padding: 0px 6px;
-  background: #27ae60;
-  border-radius: 50px;
-  color: #ffffff;
-  margin-right: 4px;
+header ul li a {
   font-weight: 400;
+  transition: 0.5s;
 }
 
-header h4 {
+header ul li a:hover {
+  color: #373a37;
   font-weight: 500;
-  margin-right: 20px;
 }
 
-header .toggle {
+.logo h1 {
+  font-size: 22px;
+}
+
+
+.navbar-items-icon {
+  color: #373a37;
   display: none;
 }
 
+header.active {
+  position: sticky;
+  top: 0;
+  left: 0;
+  background-color: #fff;
+  box-shadow: 0 2px 28px 0 rgb(0 0 0 / 6%);
+  width: 100%;
+  z-index: 10;
+}
+
 @media screen and (max-width: 768px) {
-  header {
-    padding: 0;
+  .logo h1 {
+    font-size: 30px;
   }
 
-  header img {
-    margin-top: 10px;
-  }
-
-  header .button {
+  header .icon {
     display: none;
   }
 
-  header .nav .flex {
+  .nav-links {
     display: none;
   }
 
-  header .toggle {
-    display: block;
-    margin-top: 20px;
-  }
-
-  header .small {
+  .nav-links-sidebar {
     position: absolute;
-    top: 10vh;
-    left: 0;
-    width: 100%;
-    background-color: #27ae60;
-    padding: 20px;
+    display: block;
+    background-color: #fff;
+    left: 50px;
+    top: 75px;
+    transition: 0.5s;
+    width: 80%;
+    height: 40vh;
+    z-index: 5;
   }
 
-  header li a {
-    display: inline-block;
-    margin-bottom: 20px;
-    color: #fff;
+  .nav-links-sidebar {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 30px;
+  }
+
+  header ul li {
+    margin-bottom: 30px;
+    text-align: center;
+  }
+
+  .navbar-items-icon {
+    display: block;
+    position: absolute;
+    right: 30px;
+    font-size: 30px;
+    color: #373a37;
+    border: 1px solid #000;
+    padding: 5px 10px;
   }
 }

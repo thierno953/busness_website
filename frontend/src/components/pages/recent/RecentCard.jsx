@@ -1,36 +1,58 @@
 import React from "react"
-import { list } from "../../data/Data"
+import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { addToCart } from "../../../features/cartSlice";
+import { useGetAllProductsQuery } from "../../../features/productsApi";
 
 const RecentCard = () => {
+    const { items: products, status } = useSelector((state) => state.products);
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
+
+    const { data, error, isLoading } = useGetAllProductsQuery();
+
+    const handleAddToCart = (product) => {
+        dispatch(addToCart(product));
+        navigate("/cart");
+    };
+
     return (
         <>
             <div className='content grid3 mtop'>
-                {list.map((val, index) => {
-                    const { cover, category, location, name, price, type } = val
-                    return (
-                        <div className='box shadow' key={index}>
-                            <div className='img'>
-                                <img src={cover} alt='' />
-                            </div>
-                            <div className='text'>
-                                <div className='category flex'>
-                                    <span style={{ background: category === "For Sale" ? "#25b5791a" : "#ff98001a", color: category === "For Sale" ? "#25b579" : "#ff9800" }}>{category}</span>
-                                    <i className='fa fa-heart'></i>
+                {status === "success" ? (
+                    <>
+                        {data &&
+                            data?.map((product) => (
+                                <div className='box shadow' key={product.id} >
+                                    <div className='img'>
+                                        <img src={product.image} alt='' />
+                                    </div>
+                                    <div className='text'>
+                                        <div className='category flex'>
+                                            <span>{product.brand}</span>
+                                            <div>
+                                                <button className='btn2'>€{product.price}</button>
+                                            </div>
+                                        </div>
+                                        <h4>{product.name}</h4>
+                                        <p>
+                                            <i className='fa fa-location-dot'></i> {product.desc}
+                                        </p>
+                                    </div>
+                                    <div className='button flex'>
+                                        <button onClick={() => handleAddToCart(product)}>
+                                            Add To Cart
+                                        </button>
+                                        <span>{product.type}</span>
+                                    </div>
                                 </div>
-                                <h4>{name}</h4>
-                                <p>
-                                    <i className='fa fa-location-dot'></i> {location}
-                                </p>
-                            </div>
-                            <div className='button flex'>
-                                <div>
-                                    <button className='btn2'>{price}</button> <label htmlFor=''>/sqft</label>
-                                </div>
-                                <span>{type}</span>
-                            </div>
-                        </div>
-                    )
-                })}
+                            ))}
+                    </>
+                ) : status === "pending" ? (
+                    <p>Loading...</p>
+                ) : (
+                    <p>Unexpected error occured...</p>
+                )}
             </div>
         </>
     )

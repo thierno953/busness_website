@@ -15,6 +15,7 @@ const orderSchema = new mongoose.Schema(
                 desc: { type: String },
                 price: { type: String },
                 image: { type: String },
+                type: { type: String },
                 cartQuantity: { type: Number },
             },
         ],

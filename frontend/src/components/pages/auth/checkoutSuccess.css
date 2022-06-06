@@ -1,0 +1,15 @@
+.checkoutSuccess {
+    max-width: 700px;
+    margin: auto;
+    min-height: 85vh;
+}
+
+.checkoutSuccess_flex h1 {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-top: 150px;
+    font-size: 45px;
+    font-family: 'Comforter Brush', cursive;
+    letter-spacing: 2px;
+}
